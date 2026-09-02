@@ -10,6 +10,6 @@ for n in fable-fable fable-opus fable-sonnet fable-haiku execution-guardrails do
   mkdir -p "$SK/$n" && cp "$HERE/$n/SKILL.md" "$SK/$n/SKILL.md"
 done
 cp "$HERE"/agents/*.md "$AG/"
-echo "Installed skills:"; ls "$SK" | grep -E '^(fable-|execution-guardrails)'
+echo "Installed skills:"; ls "$SK" | grep -E '^(fable-|execution-guardrails|double-check)$'
 echo "Installed agents:"; ls "$AG" | grep '^fable-'
 echo "Folder names match each SKILL.md 'name:' field — required for triggering."
