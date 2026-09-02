@@ -92,6 +92,15 @@ git clone https://github.com/mrtooher/fable-mode.git && cd fable-mode && ./insta
 (root `SKILL.md` is `fable-mode`). The agents are not loadable there; the skills detect
 that and fall back to inline mode, saying so.
 
+> **Do not install anything from `agents/` as a skill.** Those files are agent
+> definitions: second-person system prompts whose frontmatter carries `tools:` and
+> `model:`. Loaded as a skill they land in the main thread and assert things about it
+> that are false there — `fable-orchestrator` in particular tells its reader it has no
+> Write tool and must delegate to worker agents that do not exist on a skill-only
+> surface. The result is a stall, or an inline run narrating a delegation that never
+> happened — the exact failure v3 exists to prevent. Agents go in `agents/`, skills go
+> in skills.
+
 Folder name must equal the `name:` field in each SKILL.md or the skill will not trigger.
 
 ## Files

@@ -32,9 +32,11 @@ re-check work themselves — this skill is that re-check.
 1. **Automatically** at the end of any fable-mode run (fable-mode, fable-fable,
    fable-opus, fable-sonnet, fable-haiku). Those skills call this one as their final
    delivery gate. Exception: if a fable run already executed a cold verification of the
-   final deliverable (e.g. the orchestrator's fable-verifier agent checked the *finished*
-   document, not just intermediate outputs), do not duplicate it — run only the seam
-   check (section "Check the synthesis seam") and skip the rest.
+   final deliverable, do not duplicate it — run only the seam check (section "Check the
+   synthesis seam") and skip the rest. Do not infer this from the narrative: the
+   orchestrator closes its report with a `FINAL-COLD-CHECK:` line. `yes` → seam check
+   only. `intermediates-only`, `no`, or no line at all → run the full panel. Absence of
+   the line is never evidence that the check happened.
 2. **On request**: "double check this", "verify this", "make sure this is right".
 
 ## Skip conditions

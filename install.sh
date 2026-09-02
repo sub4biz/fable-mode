@@ -9,6 +9,7 @@ cp "$HERE/SKILL.md" "$SK/fable-mode/SKILL.md"
 for n in fable-fable fable-opus fable-sonnet fable-haiku execution-guardrails double-check; do
   mkdir -p "$SK/$n" && cp "$HERE/$n/SKILL.md" "$SK/$n/SKILL.md"
 done
+# Agent definitions go to agents/, never to skills/ — see README.
 cp "$HERE"/agents/*.md "$AG/"
 echo "Installed skills:"; ls "$SK" | grep -E '^(fable-|execution-guardrails|double-check)$'
 echo "Installed agents:"; ls "$AG" | grep '^fable-'

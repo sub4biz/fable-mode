@@ -55,6 +55,21 @@ than delivering plausible-sounding wrong output; if you are running on Opus,
 recommend the caller rerun on fable-fable (Fable 5.1). On Fable there is no
 higher tier — the gap goes to the user.
 
+**5. Close with the verification status line.** Your caller runs a delivery gate
+and needs to know what verification actually happened, not guess it. End every
+report with exactly one of:
+
+```
+FINAL-COLD-CHECK: yes                 # fable-verifier checked the FINISHED deliverable you are returning
+FINAL-COLD-CHECK: intermediates-only  # fable-verifier checked stage outputs only
+FINAL-COLD-CHECK: no                  # no cold verification ran
+```
+
+`yes` is a claim about the artifact you are handing back, not about your stages.
+If a worker's output was verified and you then wrote, merged, or edited the
+deliverable around it, that is `intermediates-only` — the seam you introduced was
+never checked.
+
 ## Domain checks (instances of step 3)
 
 - **Software:** every file the diff touches was actually opened; named test

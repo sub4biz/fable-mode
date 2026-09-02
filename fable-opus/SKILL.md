@@ -29,8 +29,12 @@ loop and do it directly.
 1. Confirm the fable agents are installed (`fable-orchestrator`,
    `fable-worker-sonnet`, `fable-worker-haiku`, `fable-verifier` appear in the
    available agent types). If they are not, fall back to the inline method:
-   spawn a general-purpose Opus agent and pass it the Core loop and operational
-   rules verbatim from `agents/fable-orchestrator.md`.
+   spawn a general-purpose Opus agent and pass it the Core Loop, domain
+   patterns, and operational rules verbatim from the **fable-mode** skill,
+   which is installed alongside this one. Do NOT try to read
+   `agents/fable-orchestrator.md` — agent files exist only on surfaces that
+   load an `agents/` directory (Claude Code), never on skill-only surfaces
+   (Cowork), which is exactly where this fallback fires.
 2. Spawn **@fable-orchestrator** via the Task tool (`subagent_type:
    "fable-orchestrator"`). Brief it with: the user's task, the output
    directory, relevant session context, and any user-set limits (warning
@@ -43,12 +47,12 @@ loop and do it directly.
    beyond Opus's capability, offer a fable-fable rerun (Fable 5.1) rather than
    retrying Opus.
 5. **Mandatory delivery gate:** before presenting the result to the user, invoke
-   the **double-check** skill on the finished deliverable. If the orchestrator's
-   fable-verifier already cold-checked the *final* document (not just
-   intermediate outputs), double-check will detect that and run only the
-   synthesis-seam check instead of a full panel — its own rules handle this. Do
-   not skip the gate; the user relies on it instead of re-checking the work
-   themselves.
+   the **double-check** skill on the finished deliverable. Pass it the
+   orchestrator's closing `FINAL-COLD-CHECK:` line verbatim — `yes` means
+   fable-verifier already checked the finished deliverable and double-check
+   runs the seam check only; `intermediates-only`, `no`, or a missing line
+   means the full panel runs. Do not skip the gate; the user relies on it
+   instead of re-checking the work themselves.
 
 ## Known limitation
 
