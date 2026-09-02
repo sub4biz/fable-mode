@@ -11,6 +11,6 @@ for n in fable-fable fable-opus fable-sonnet fable-haiku execution-guardrails do
 done
 # Agent definitions go to agents/, never to skills/ — see README.
 cp "$HERE"/agents/*.md "$AG/"
-echo "Installed skills:"; ls "$SK" | grep -E '^(fable-|execution-guardrails|double-check)$'
+echo "Installed skills:"; ls "$SK" | grep -E '^(fable-.*|execution-guardrails|double-check)$'
 echo "Installed agents:"; ls "$AG" | grep '^fable-'
 echo "Folder names match each SKILL.md 'name:' field — required for triggering."
