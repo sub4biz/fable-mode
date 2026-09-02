@@ -8,7 +8,7 @@ description: >
   "deep work mode") OR when the task objectively spans multiple files, multiple
   sources, or multiple sessions. Do NOT trigger on ordinary multi-step requests
   that a direct attempt handles fine. For a run pinned to a specific model, use
-  fable-opus, fable-sonnet, or fable-haiku instead. Always-on guardrails
+  fable-fable, fable-opus, fable-sonnet, or fable-haiku instead. Always-on guardrails
   (verify-before-flag, warning batching, sed safety) live in the companion
   execution-guardrails skill.
 ---
@@ -35,8 +35,10 @@ inline in the main thread. Delegation is therefore structural now:
 - If the fable agents are installed (`fable-orchestrator`,
   `fable-worker-sonnet`, `fable-worker-haiku`, `fable-verifier`), route large
   tasks through **@fable-orchestrator** — an Opus agent with no Write/Edit
-  tool. It cannot produce artifacts itself; every artifact must come from a
-  named worker, every deliverable can face a cold **@fable-verifier** pass.
+  tool (fable-fable runs the same agent with `model: "fable"`; ladder is
+  Haiku → Sonnet → Opus → Fable → user). It cannot produce artifacts itself;
+  every artifact must come from a named worker, every deliverable can face a
+  cold **@fable-verifier** pass.
 - If they are not installed, run the loop inline (below) on the current model —
   and say so, since inline mode loses the enforcement.
 
@@ -59,6 +61,12 @@ the stage unverified. A fix at stage N re-runs the checks it invalidated.
 **4. Self-critique before delivery.** Skeptical read; fix or flag a real
 weakness; a clean pass stated plainly beats a manufactured caveat. Beyond
 capability → name what was attempted and where it failed.
+
+**5. Mandatory delivery gate: double-check.** Before presenting anything to
+the user, invoke the **double-check** skill on the finished deliverable (fresh
+checker panel; fixes any FAIL; attaches a verification summary; degrades to a
+cold self-check without the Agent tool). Not optional; never run twice on the
+same deliverable.
 
 ## Domain checks
 

@@ -1,15 +1,16 @@
 ---
 name: fable-opus
 description: >
-  Run fable-mode execution discipline on Claude Opus — the strongest staged run
-  available. Routes the task to the @fable-orchestrator agent (Opus,
-  Write-less), which stages the work, delegates artifact production to
+  Run fable-mode execution discipline on Claude Opus — one rung below Fable 5.1
+  on the escalation ladder. Routes the task to the @fable-orchestrator agent
+  (Opus, Write-less), which stages the work, delegates artifact production to
   @fable-worker-sonnet / @fable-worker-haiku, and cold-checks deliverables with
   @fable-verifier. Trigger when the user explicitly asks for
-  thorough/systematic/"deep work" handling on the strongest model ("fable on
-  opus", "stage this on opus", "deep work mode, opus"). Do NOT use for ordinary
-  single-pass tasks — and prefer fable-sonnet or fable-haiku when the task
-  doesn't need peak reasoning.
+  thorough/systematic/"deep work" handling on Opus ("fable on
+  opus", "stage this on opus", "deep work mode, opus"). Escalate to fable-fable
+  when the orchestrator reports the task exceeds Opus's ceiling. Do NOT use for
+  ordinary single-pass tasks — and prefer fable-sonnet or fable-haiku when the
+  task doesn't need peak reasoning.
 ---
 
 # Fable Mode — Opus (v3, agent-routed)
@@ -38,7 +39,16 @@ loop and do it directly.
    orchestrator's agent definition carries them. Brief the task, not the
    method.
 4. When it returns, relay the result, every stage it marked unverified, and its
-   recommendations (surfaced scope it did not build).
+   recommendations (surfaced scope it did not build). If it reports the task
+   beyond Opus's capability, offer a fable-fable rerun (Fable 5.1) rather than
+   retrying Opus.
+5. **Mandatory delivery gate:** before presenting the result to the user, invoke
+   the **double-check** skill on the finished deliverable. If the orchestrator's
+   fable-verifier already cold-checked the *final* document (not just
+   intermediate outputs), double-check will detect that and run only the
+   synthesis-seam check instead of a full panel — its own rules handle this. Do
+   not skip the gate; the user relies on it instead of re-checking the work
+   themselves.
 
 ## Known limitation
 

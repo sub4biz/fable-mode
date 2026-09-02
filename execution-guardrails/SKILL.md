@@ -2,7 +2,7 @@
 name: execution-guardrails
 description: >
   Always-on operational guardrails, model-independent. Apply on EVERY task and
-  EVERY model (Opus, Sonnet, Haiku, and any future tier) whether or not
+  EVERY model (Fable, Opus, Sonnet, Haiku, and any future tier) whether or not
   fable-mode's staged loop is running. Three rules: (1) verify-before-flag —
   never raise a warning about a problem that hasn't been confirmed present by a
   direct check; (2) warning batching — accumulate minor concerns and surface

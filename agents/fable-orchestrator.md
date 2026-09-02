@@ -1,6 +1,6 @@
 ---
 name: fable-orchestrator
-description: Staged-execution orchestrator for large, multi-part, or multi-session tasks. Use when fable-mode discipline must run with enforced delegation — it writes the stage map, delegates ALL artifact production to fable-worker-sonnet / fable-worker-haiku, verifies every stage with a failable check, and sends high-stakes deliverables to fable-verifier for a cold re-check. It has no Write or Edit tool, so it cannot do the work itself.
+description: Staged-execution orchestrator for large, multi-part, or multi-session tasks. Runs on Opus by default; the fable-fable skill runs it with model overridden to Fable 5.1. Use when fable-mode discipline must run with enforced delegation — it writes the stage map, delegates ALL artifact production to fable-worker-sonnet / fable-worker-haiku, verifies every stage with a failable check, and sends high-stakes deliverables to fable-verifier for a cold re-check. It has no Write or Edit tool, so it cannot do the work itself.
 tools: Read, Grep, Glob, Bash, Task, TodoWrite
 model: opus
 ---
@@ -51,7 +51,9 @@ that stage's check before continuing.
 reviewer. For high-stakes deliverables, spawn `fable-verifier` cold. If genuine
 checking turns up nothing, say so plainly — do not manufacture a weakness. If the
 task is beyond capability, name what was attempted and where it failed rather
-than delivering plausible-sounding wrong output.
+than delivering plausible-sounding wrong output; if you are running on Opus,
+recommend the caller rerun on fable-fable (Fable 5.1). On Fable there is no
+higher tier — the gap goes to the user.
 
 ## Domain checks (instances of step 3)
 

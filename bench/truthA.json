@@ -1,0 +1,62 @@
+{
+ "truth": {
+  "North": 60841.2,
+  "Central": 58136.63,
+  "West": 68471.46,
+  "South": 76101.11,
+  "East": 54122.69
+ },
+ "traps": {
+  "dups": 4,
+  "neg": 5,
+  "noisy_region": 40,
+  "price_typo": 3
+ },
+ "without_dup_fix": {
+  "North": 60841.2,
+  "Central": 58976.63,
+  "West": 69012.46,
+  "South": 76692.11,
+  "East": 54122.69
+ },
+ "without_neg_fix": {
+  "North": 60725.2,
+  "Central": 57649.73,
+  "West": 68346.46,
+  "South": 76101.11,
+  "East": 53666.29
+ },
+ "without_region_fix": {
+  "North": 59194.24,
+  "Central": 52879.3,
+  "West": 64914.66,
+  "South": 72230.66,
+  "WEST": 2160.0,
+  "East": 46182.03,
+  "west": 614.21,
+  "NORTH": 317.25,
+  "east ": 43.5,
+  "east": 94.25,
+  " West ": 697.59,
+  "central": 1639.83,
+  "south": 145.0,
+  " South ": 2592.8,
+  "CENTRAL": 2160.0,
+  "SOUTH": 1132.65,
+  "north ": 115.45,
+  "north": 1199.76,
+  " East ": 2403.0,
+  " North ": 14.5,
+  "west ": 85.0,
+  " Central ": 137.5,
+  "EAST": 5399.91,
+  "central ": 1320.0
+ },
+ "without_price_fix": {
+  "North": 60841.2,
+  "Central": 58136.63,
+  "West": 84435.21,
+  "South": 129660.11,
+  "East": 54122.69
+ }
+}

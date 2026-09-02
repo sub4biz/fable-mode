@@ -1,0 +1,3 @@
+Working directory: /home/claude/bench/runs/{d}
+
+Read TASK.md in that directory and complete the task. Write all outputs into that directory only; do not modify anything outside it. When done, reply with a short summary of what you produced and any decisions you made.

@@ -1,0 +1,254 @@
+{
+ "A_base_1": {
+  "score": 100,
+  "detail": {
+   "exact": true,
+   "neg_policy": "netted"
+  },
+  "tokens": 61818,
+  "ms": 60212
+ },
+ "A_base_2": {
+  "score": 100,
+  "detail": {
+   "exact": true,
+   "neg_policy": "netted"
+  },
+  "tokens": 61360,
+  "ms": 51322
+ },
+ "A_skill_1": {
+  "score": 100,
+  "detail": {
+   "exact": true,
+   "neg_policy": "netted"
+  },
+  "tokens": 65541,
+  "ms": 87265
+ },
+ "A_skill_2": {
+  "score": 100,
+  "detail": {
+   "exact": true,
+   "neg_policy": "netted"
+  },
+  "tokens": 64915,
+  "ms": 82421
+ },
+ "B_base_1": {
+  "score": 100,
+  "detail": {
+   "tests_pass": true,
+   "pytest_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+   "old_name_absent": true,
+   "new_name_defined": true,
+   "recalc_total_cache_intact": true,
+   "CALC_TOTAL_VERSION_intact": true,
+   "no_tax_fn_intact": true,
+   "legacy_export_runs": true,
+   "legacy_err": "",
+   "tests_untouched": true
+  },
+  "tokens": 58255,
+  "ms": 24792
+ },
+ "B_base_2": {
+  "score": 100,
+  "detail": {
+   "tests_pass": true,
+   "pytest_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+   "old_name_absent": true,
+   "new_name_defined": true,
+   "recalc_total_cache_intact": true,
+   "CALC_TOTAL_VERSION_intact": true,
+   "no_tax_fn_intact": true,
+   "legacy_export_runs": true,
+   "legacy_err": "",
+   "tests_untouched": true
+  },
+  "tokens": 60303,
+  "ms": 47571
+ },
+ "B_skill_1": {
+  "score": 100,
+  "detail": {
+   "tests_pass": true,
+   "pytest_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+   "old_name_absent": true,
+   "new_name_defined": true,
+   "recalc_total_cache_intact": true,
+   "CALC_TOTAL_VERSION_intact": true,
+   "no_tax_fn_intact": true,
+   "legacy_export_runs": true,
+   "legacy_err": "",
+   "tests_untouched": true
+  },
+  "tokens": 64572,
+  "ms": 59931
+ },
+ "B_skill_2": {
+  "score": 100,
+  "detail": {
+   "tests_pass": true,
+   "pytest_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+   "old_name_absent": true,
+   "new_name_defined": true,
+   "recalc_total_cache_intact": true,
+   "CALC_TOTAL_VERSION_intact": true,
+   "no_tax_fn_intact": true,
+   "legacy_export_runs": true,
+   "legacy_err": "",
+   "tests_untouched": true
+  },
+  "tokens": 62652,
+  "ms": 54142
+ },
+ "C_base_1": {
+  "score": 100,
+  "detail": {
+   "title": true,
+   "one_h1": true,
+   "## Summary": true,
+   "## Quarterly": true,
+   "## Best quarter": true,
+   "## Growth": true,
+   "## Net total": true,
+   "total_gross": true,
+   "table_header": true,
+   "net_rows_11pct": 4,
+   "net_if_12_rows": 2,
+   "net_if_10_rows": 2,
+   "net_if_8_rows": 0,
+   "net_total": true,
+   "best": true,
+   "growth": true,
+   "footer_full": true,
+   "footer_short": false
+  },
+  "tokens": 58698,
+  "ms": 34627
+ },
+ "C_base_2": {
+  "score": 100,
+  "detail": {
+   "title": true,
+   "one_h1": true,
+   "## Summary": true,
+   "## Quarterly": true,
+   "## Best quarter": true,
+   "## Growth": true,
+   "## Net total": true,
+   "total_gross": true,
+   "table_header": true,
+   "net_rows_11pct": 4,
+   "net_if_12_rows": 2,
+   "net_if_10_rows": 2,
+   "net_if_8_rows": 0,
+   "net_total": true,
+   "best": true,
+   "growth": true,
+   "footer_full": true,
+   "footer_short": false
+  },
+  "tokens": 58105,
+  "ms": 30990
+ },
+ "C_skill_1": {
+  "score": 100,
+  "detail": {
+   "title": true,
+   "one_h1": true,
+   "## Summary": true,
+   "## Quarterly": true,
+   "## Best quarter": true,
+   "## Growth": true,
+   "## Net total": true,
+   "total_gross": true,
+   "table_header": true,
+   "net_rows_11pct": 4,
+   "net_if_12_rows": 2,
+   "net_if_10_rows": 2,
+   "net_if_8_rows": 0,
+   "net_total": true,
+   "best": true,
+   "growth": true,
+   "footer_full": true,
+   "footer_short": false
+  },
+  "tokens": 66453,
+  "ms": 92164
+ },
+ "C_skill_2": {
+  "score": 100,
+  "detail": {
+   "title": true,
+   "one_h1": true,
+   "## Summary": true,
+   "## Quarterly": true,
+   "## Best quarter": true,
+   "## Growth": true,
+   "## Net total": true,
+   "total_gross": true,
+   "table_header": true,
+   "net_rows_11pct": 4,
+   "net_if_12_rows": 2,
+   "net_if_10_rows": 2,
+   "net_if_8_rows": 0,
+   "net_total": true,
+   "best": true,
+   "growth": true,
+   "footer_full": true,
+   "footer_short": false
+  },
+  "tokens": 63301,
+  "ms": 57085
+ },
+ "D_base_1": {
+  "score": 100,
+  "detail": {
+   "source": "https://www.niaaa.nih.gov/sites/default/files/pcyr1970-2023.txt",
+   "source_is_niaaa": true,
+   "hits": 36,
+   "checked": 36,
+   "nulls": 0
+  },
+  "tokens": 62828,
+  "ms": 51355
+ },
+ "D_base_2": {
+  "score": 100,
+  "detail": {
+   "source": "https://www.niaaa.nih.gov/sites/default/files/pcyr1970-2023.txt",
+   "source_is_niaaa": true,
+   "hits": 36,
+   "checked": 36,
+   "nulls": 0
+  },
+  "tokens": 64798,
+  "ms": 51774
+ },
+ "D_skill_1": {
+  "score": 100,
+  "detail": {
+   "source": "https://www.niaaa.nih.gov/sites/default/files/pcyr1970-2023.txt",
+   "source_is_niaaa": true,
+   "hits": 36,
+   "checked": 36,
+   "nulls": 0
+  },
+  "tokens": 70698,
+  "ms": 104038
+ },
+ "D_skill_2": {
+  "score": 100,
+  "detail": {
+   "source": "https://www.niaaa.nih.gov/sites/default/files/pcyr1970-2023.txt",
+   "source_is_niaaa": true,
+   "hits": 36,
+   "checked": 36,
+   "nulls": 0
+  },
+  "tokens": 71071,
+  "ms": 117490
+ }
+}

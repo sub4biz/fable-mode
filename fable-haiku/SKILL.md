@@ -37,3 +37,7 @@ loop and do it directly.
    without human review.
 5. If a worker escalates ("needs synthesis"), re-route that part to
    fable-worker-sonnet rather than retrying Haiku with a louder prompt.
+6. **Mandatory delivery gate:** before presenting the result to the user, invoke
+   the **double-check** skill on the finished deliverable. If step 4's verifier
+   already cold-checked the *final* document, double-check runs only the seam
+   check — its own rules handle that. Do not skip the gate.

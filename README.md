@@ -1,67 +1,119 @@
 # fable-mode
 
-A Claude skill that enforces staged execution discipline on large tasks:
-a written stage plan, parallel delegation where the runtime allows, a
-verification check at each stage that can actually fail, and a skeptical
-self-review before delivery.
+Execution discipline for Claude on large tasks: a written stage map, delegation to
+named agents where the runtime allows, a verification check at every stage that can
+actually **fail**, a skeptical self-review, and a mandatory cold double-check before
+anything is delivered.
 
-## What it does
+It is a checklist, not a capability transplant. Benchmarked three times so the README
+can say what it does and does not do (see [Evidence](#evidence)).
 
-The skill shapes the *procedure* a model follows on complex work. It makes
-the model decompose before acting, delegate independent sub-work where
-subagent tooling exists, verify each stage against a failable check rather
-than a feeling, and critique its own output before delivering it.
+## The ladder
 
-## What it does not do
+```
+Haiku  →  Sonnet  →  Opus  →  Fable 5.1  →  the user
+```
 
-It does not change the underlying model's capability. Coherence across
-long tasks and genuine self-correction live in the model's weights, not
-in a prompt. On a model that already does these well, the skill
-reinforces good habits. On a weaker model, it imposes structure the model
-would otherwise skip, but it cannot raise the reasoning ceiling. Treat it as
-a checklist, not a capability transplant.
+One skill per rung, same core loop, tuned to that tier's known failure mode:
 
-## When to use it
+| Skill | Model | Use it when | Known gap it guards |
+|---|---|---|---|
+| `fable-mode` | whatever is running | default; adapts intensity to the model | — |
+| `fable-fable` | Claude Fable 5.1 | the deliverable needs an **audit trail** (worklog, reproducible checks, flagged judgment calls) or spans sessions | none measured — a provenance runner, not an accuracy runner |
+| `fable-opus` | Claude Opus | peak synthesis short of Fable; orchestrates Sonnet/Haiku workers | trusts its own introspection; scope growth |
+| `fable-sonnet` | Claude Sonnet | balanced default for thorough work | skips the failable check, substitutes "looks right" |
+| `fable-haiku` | Claude Haiku | bulk, cheap, parallel mechanical work | skips verification under time pressure |
 
-Trigger on tasks that span multiple files, multiple sources, or multiple
-sessions, or when you explicitly ask for systematic execution. Do not use it
-on tasks with one obvious approach that fit in a single pass. Staging a
-trivial task wastes effort and buries the answer.
+Two always-on companions:
 
-## Variants
+- `execution-guardrails` — verify-before-flag, warning batching, word-boundary
+  find-and-replace. Every model, every task, whether or not the loop runs.
+- `double-check` — the delivery gate. A panel of fresh checker agents (Haiku for
+  mechanical checks, Sonnet for requirements, Opus to adjudicate) attacks the
+  *finished* artifact. Every fable runner calls it before handing anything over.
 
-Four skills share the same core loop. Pick by how you want the work run:
+## Core loop
 
-- `fable-mode` - the default. Runs the loop inline on the current model (Opus
-  when that is the host). Use this unless you want the work pinned to a
-  specific model.
-- `fable-opus` - spawns a subagent pinned to Claude Opus, with authority to route
-  independent sub-parts down to Sonnet/Haiku workers. The strongest staged run;
-  use for peak synthesis. Requires a runtime with the Agent tool.
-- `fable-sonnet` - spawns a subagent pinned to Claude Sonnet. The balanced
-  choice: strong reasoning at lower cost than Opus. Requires a runtime with
-  the Agent tool.
-- `fable-haiku` - spawns a subagent pinned to Claude Haiku. For high-volume or
-  cost-sensitive work where structure matters more than peak synthesis.
-  Requires a runtime with the Agent tool.
+1. **Stage map first.** Numbered stages, expected output each, one verifiable artifact
+   per stage. Living document; at most two full replans per run — a third means the
+   requirements are ambiguous, go back to the user.
+2. **Delegate by name.** Reasoning stages to a Sonnet worker, mechanical stages to a
+   Haiku worker, cold checks to a read-only verifier. Workers don't spawn workers.
+3. **Verify with a check that can fail.** A test that runs, a file in the expected
+   shape, a source actually fetched, an output diffed against spec. "I reviewed it and
+   it looks right" is not a check. Name the exact command or mark the stage unverified.
+4. **Self-critique.** Fix or flag a real weakness; a clean pass stated plainly beats a
+   manufactured caveat.
+5. **Double-check.** Fresh eyes, ternary verdicts (PASS / FAIL / UNVERIFIABLE), fix and
+   re-check before delivery.
 
-The variants pass the same stage map, failable verification, self-critique,
-warning threshold, and find-and-replace safety rules down to their subagent.
-They do not raise the chosen model's reasoning ceiling.
+## v3: delegation is structural
+
+Field feedback on v2 (r/claudeskills): telling a model *in prose* to spawn a worker
+almost always runs the task inline. So v3 moves the discipline into real agent
+definitions under `agents/`:
+
+- `fable-orchestrator` — **no Write/Edit tool**. It cannot produce artifacts; every
+  one must come from a named worker. Opus by default; `fable-fable` runs the same
+  definition with `model: "fable"` (per-invocation override, documented for Claude
+  Code and confirmed in Cowork).
+- `fable-worker-sonnet` / `fable-worker-haiku` — one bounded assignment, exact output
+  path, named pass condition, evidence in the report.
+- `fable-verifier` — read-only; gets the spec and the artifact, never the producer's
+  reasoning.
+
+The skills shrink to routers. Full history in `V3-CHANGES.md`.
+
+## Evidence
+
+Three benchmark rounds, deterministic graders, tasks built with **unstated** traps
+(duplicate rows, grep-invisible `getattr("calc" + "_total")`, errata chains superseded
+by meeting notes, a real federal data file to fetch or fabricate).
+
+| Tier | Effect of the skill | Source |
+|---|---|---|
+| Fable 5.1 | **0 delta** — 100/100 in all 16 paired runs (n=2/cell, 4 tasks incl. open-ended real-data fetch); ~1.1× tokens, ~2× wall | `BENCHMARK-2026-09-02.md` |
+| Opus / Sonnet | 0 delta on closed graded tasks; **real** on open-ended research — Opus+skill fetched and parsed the NIAAA state dataset, Opus baseline shipped synthetic trend lines | July 2026 rounds |
+| Haiku | real but noisy: +25 / −17 across rounds; raises the floor on mechanical diligence, cannot supply synthesis | July 2026 rounds |
+
+Read: the loop's value **inverts with model strength**. On Fable 5.1 it buys provenance.
+On Opus it buys real sources over plausible ones. On Haiku it buys verification the
+model would otherwise skip — sometimes. The harness is in `bench/`; rerun it.
+
+## Install
+
+**Claude Code** (user scope — skills to `~/.claude/skills/`, agents to `~/.claude/agents/`):
+
+```bash
+git clone https://github.com/mrtooher/fable-mode.git && cd fable-mode && ./install.sh
+```
+
+**Cowork / claude.ai**: Settings → Capabilities → Skills → add each `<name>/SKILL.md`
+(root `SKILL.md` is `fable-mode`). The agents are not loadable there; the skills detect
+that and fall back to inline mode, saying so.
+
+Folder name must equal the `name:` field in each SKILL.md or the skill will not trigger.
 
 ## Files
 
-- `SKILL.md` - the skill itself
-- `EXAMPLE.md` - a worked before/after showing the verification check catching
-  an error that a one-shot attempt ships
-- `fable-opus/SKILL.md` - the Opus variant
-- `fable-sonnet/SKILL.md` - the Sonnet variant
-- `fable-haiku/SKILL.md` - the Haiku variant
+```
+SKILL.md                    fable-mode (default, adaptive)
+fable-fable/SKILL.md        Fable 5.1 runner
+fable-opus/SKILL.md         Opus runner (orchestrator route)
+fable-sonnet/SKILL.md       Sonnet runner
+fable-haiku/SKILL.md        Haiku runner
+execution-guardrails/       always-on rules
+double-check/               delivery gate
+agents/                     orchestrator, sonnet worker, haiku worker, verifier
+bench/                      fixtures generator, graders, prompts, results.json
+BENCHMARK-2026-09-02.md     Fable 5.1 results
+EXAMPLE.md                  worked before/after: the failable check catching a bug
+V3-CHANGES.md               why delegation became structural
+install.sh                  Claude Code installer
+```
 
-## Installation
+## When NOT to use it
 
-Place each skill directory (`fable-mode`, and optionally `fable-opus` / `fable-sonnet` /
-`fable-haiku`) wherever your Claude environment loads skills from (for example,
-a skills directory read by Claude Code), then invoke it by name or let it
-trigger on a qualifying task. Each variant's folder name must match the `name:`
-field in its frontmatter.
+One obvious approach that fits in a single pass → do it directly. Staging a trivial
+task buries the answer under ceremony. The loop earns its cost only when a one-shot
+attempt would plausibly miss something — or when you need to show your work.

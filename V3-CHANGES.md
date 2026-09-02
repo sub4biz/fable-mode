@@ -13,7 +13,8 @@ delegate. v3: delegation is structural.
 - **`agents/`** — four real agent definitions with frontmatter (`name`,
   `description`, `tools`, `model`). The discipline moved out of skill prose
   into the agents' system prompts, so it can't be skimmed away.
-  - `fable-orchestrator` — Opus, **no Write/Edit tool**. It cannot do the work
+  - `fable-orchestrator` — Opus by default (Fable 5.1 via the fable-fable
+    skill's `model: "fable"` override), **no Write/Edit tool**. It cannot do the work
     itself; producing an artifact requires spawning a worker by name. Bash
     retained for verification only (known side-door; see limitation in
     fable-opus skill).
@@ -23,7 +24,8 @@ delegate. v3: delegation is structural.
     bare "unverified"), escalate-don't-improvise.
   - `fable-verifier` — read-only cold verifier; gets spec + artifact only,
     never the producer's reasoning.
-- **`skills/`** — the four skills shrink to routers: trigger conditions, how to
+- **`skills/`** — the five skills (fable-mode, fable-fable, fable-opus,
+  fable-sonnet, fable-haiku) shrink to routers: trigger conditions, how to
   brief the named agent, fallback to v2 inline mode when the agents aren't
   installed. Rules are no longer inlined verbatim into briefings — the agent
   definitions carry them.
@@ -45,3 +47,14 @@ invented trend lines. v3 targets the delegation gap, which the benchmark's
 prose briefings never enforced. Not yet re-benchmarked.
 
 Companion: `execution-guardrails` skill (unchanged from v2) stays always-on.
+
+## 2026-09-02: Fable 5.1 rung
+
+Claude Fable 5.1 became available (plan-included). Ladder is now
+Haiku → Sonnet → Opus → Fable → user. New `skills/fable-fable` routes to the
+same orchestrator with `model: "fable"`; fable-opus is no longer terminal and
+recommends a fable-fable rerun when Opus's ceiling is hit. Benchmarked the same
+day (`BENCHMARK-2026-09-02.md`): 16 paired runs on Fable 5.1, n=2 per cell, four
+tasks including an open-ended real-data fetch — 100/100 in every cell, both
+arms; skill cost ~1.1× tokens, ~2× wall. On this tier the discipline is a
+provenance runner, not an accuracy runner.

@@ -7,7 +7,7 @@ description: >
   by a cold @fable-verifier pass. Trigger when the user explicitly asks for
   thorough/systematic/"deep work" handling on Sonnet ("fable on sonnet", "stage
   this on sonnet", "deep work mode, sonnet"). The balanced default between Haiku
-  (cheap/fast) and Opus (peak reasoning). Do NOT use for ordinary single-pass
+  (cheap/fast) and Opus/Fable (peak reasoning). Do NOT use for ordinary single-pass
   tasks.
 ---
 
@@ -34,3 +34,7 @@ loop and do it directly.
 4. For high-stakes deliverables, follow with **@fable-verifier**, briefed with
    only the spec and the artifact path — not the worker's report.
 5. Relay results and anything marked unverified.
+6. **Mandatory delivery gate:** before presenting the result to the user, invoke
+   the **double-check** skill on the finished deliverable. If step 4's verifier
+   already cold-checked the *final* document, double-check runs only the seam
+   check — its own rules handle that. Do not skip the gate.
